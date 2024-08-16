@@ -7,7 +7,7 @@ const TwibbonEditor = () => {
   const [twibbon, setTwibbon] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [canvasSize, setCanvasSize] = useState({ width: 5000, height: 5000 });
+  const [canvasSize, setCanvasSize] = useState({ width: 1000, height: 1000 });
   const [imageScale, setImageScale] = useState(1);
   const [originalImageSize, setOriginalImageSize] = useState({ width: 0, height: 0 }); // Tambahkan state ini
 
@@ -37,16 +37,18 @@ const TwibbonEditor = () => {
 
   useEffect(() => {
     const updateCanvasSize = () => {
-      const width = window.innerWidth > 600 ? 500 : window.innerWidth - 40;
+      const width = window.innerWidth > 600 ? 500 : window.innerWidth - 90;
       const height = width;
       setCanvasSize({ width, height });
     };
+    console.log(window.innerWidth);
 
     window.addEventListener("resize", updateCanvasSize);
     updateCanvasSize();
 
     return () => window.removeEventListener("resize", updateCanvasSize);
   }, []);
+  console.log(canvasSize);
 
   const handleImageUpload = (e) => {
     const img = new Image();

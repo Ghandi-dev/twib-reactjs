@@ -176,7 +176,7 @@ const TwibbonEditor = () => {
 
   return (
     <Container maxWidth="md">
-      <Box my={4}>
+      <Box m={4}>
         <Grid container spacing={2} justifyContent="center">
           <Grid item xs={12} sm={6}>
             <Button variant="contained" component="label" fullWidth sx={{ mb: 2 }}>

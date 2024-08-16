@@ -7,7 +7,7 @@ const TwibbonEditor = () => {
   const [twibbon, setTwibbon] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [canvasSize, setCanvasSize] = useState({ width: 1000, height: 1000 });
+  const [canvasSize, setCanvasSize] = useState({ width: 500, height: 500 });
   const [imageScale, setImageScale] = useState(1);
   const [originalImageSize, setOriginalImageSize] = useState({ width: 0, height: 0 }); // Tambahkan state ini
 
@@ -37,18 +37,17 @@ const TwibbonEditor = () => {
 
   useEffect(() => {
     const updateCanvasSize = () => {
-      const width = window.innerWidth > 600 ? 500 : window.innerWidth - 90;
+      const isMobile = window.innerWidth <= 600;
+      const width = isMobile ? window.innerWidth * 0.5 : 500; // Mengurangi lebih sedikit pada handphone
       const height = width;
       setCanvasSize({ width, height });
     };
-    console.log(window.innerWidth);
 
     window.addEventListener("resize", updateCanvasSize);
     updateCanvasSize();
 
     return () => window.removeEventListener("resize", updateCanvasSize);
   }, []);
-  console.log(canvasSize);
 
   const handleImageUpload = (e) => {
     const img = new Image();
@@ -137,7 +136,6 @@ const TwibbonEditor = () => {
   };
 
   const handleDownload = () => {
-    const canvas = canvasRef.current;
     const downloadCanvas = document.createElement("canvas");
     const downloadCtx = downloadCanvas.getContext("2d");
 
